@@ -17,24 +17,44 @@ loop
   }
   else
   {
-    InputBox, widthOfSpreadSheet, %programName%, What is the width
-    if ErrorLevel
-      ExitApp
     loop {
       InputBox, campaign, %programName%, What is the campagin?
+      if ErrorLevel
+        ExitApp
       if (campaign != 6 && campaign != 18 && campaign != 30) {
         MsgBox, Please just enter either 6, 18, or 30
       }
-      else break 1
+      else {
+        if (campagin < 30) {
+          widthOfSpreadSheet := 36
+        } else {
+          widthOfSpreadSheet := 40
+        }
+        break
+      }
     }
     IniRead, userInitials, config.ini, userDetails, userInitials
     break
   }
 }
 
-Home::F15
-
-F15::
+Home::
+Send ^c
+Sleep 100
+clipboard := StrReplace(clipboard, "`r`n")
+if (clipboard != "") { ;If cell is not empty
+  conversion := true
+  upgradeAmount := clipboard
+  Send, {Right}
+  Sleep 200
+  Send ^c
+  Sleep, 200
+  originalAmount := clipboard - upgradeAmount
+  totalAmount := clipboard
+  Send {Left}
+} else {
+  conversion := false
+}
 
 
 ;Grab the constituents ID
@@ -52,7 +72,7 @@ Sleep 500
 
 ;Find the search bar and click on it
 pressImage("searchBar.png")
-Sleep 1000
+Sleep 2000
 
 
 ;Enter consistents ID and enter
@@ -66,17 +86,14 @@ Sleep 2000
 ;Go to interaction
 pressImage("interaction.png")
 Sleep 1000
-;Get wether it is a conversion or NTC
-MsgBox , 260,YTC or NTC, Was it a YTC?
-IfMsgBox Yes
-  InputBox, upgradeAmount, Upgrade amount, What was the upgrade amount please?
-else
-  upgradeAmount := 0
+
+
+;Fill out the interaction
 
 
 outcomeStart := "TM-RG "
 outcomeEnd := " to Upgrade"
-if (upgradeAmount > 0) ;If it is a conversion
+if (conversion) ;If it is a conversion
 {
   outcome := "Yes"
 }
@@ -95,7 +112,7 @@ Send {Tab}
 Sleep 1000
 Send +{Tab}
 
-if (upgradeAmount > 0) {
+if (conversion) {
   Send TM Upgrade
   Send {Space}
   Send %campaign%
@@ -129,10 +146,13 @@ Send Telefund -{Space}
 outcomeComment := outcome . outcomeEnd
 Send %outcomeComment%{Space}
 
-if (upgradeAmount > 0) ;If it is a conversion
+if (conversion) ;If it is a conversion
 {
-  Send of %upgradeAmount%{Space}
+  Send of $%upgradeAmount%{Space}
 }
+
+Send , from $%originalAmount% to $%totalAmount%.{Space}
+
 Send -{Space}
 Send %userInitials%
 
