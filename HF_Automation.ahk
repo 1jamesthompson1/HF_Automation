@@ -32,15 +32,18 @@ loop
   }
 }
 
-Home::F14
+Home::F15
 
-F14::
+F15::
+
+
 ;Grab the constituents ID
 loop %widthOfSpreadSheet%
 {
   Send, {Left}
   Sleep 100
 }
+Sleep 500
 Send, ^c
 Sleep 100
 ;Move to the Kete Tab
@@ -51,8 +54,10 @@ Sleep 500
 pressImage("searchBar.png")
 Sleep 1000
 
+
 ;Enter consistents ID and enter
 Send, ^v
+Sleep 500
 Send, {Enter}
 Sleep 1000
 Send, {Enter}
@@ -160,3 +165,5 @@ pressImage(imageFileName)
   Sleep 100
   return
 }
+
+Esc::ExitApp
