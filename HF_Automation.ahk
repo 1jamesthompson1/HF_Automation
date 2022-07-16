@@ -140,10 +140,10 @@ Return
 
 pressImage(imageFileName)
 {
-  CoordMode Pixel
+  ;CoordMode Pixel
   Loop
   {
-    ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, searchImages\%imageFileName%
+    ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *6 searchImages\%imageFileName%
     if (ErrorLevel = 2){
       MsgBox Could not conduct the search.
       Exit
@@ -153,7 +153,9 @@ pressImage(imageFileName)
     }
   }
   Sleep 100
-  CoordMode Mouse
+  ;CoordMode Mouse
+  FoundX := FoundX + 10
+  FoundY := FoundY + 10
   Click, %FoundX% %FoundY%
   Sleep 100
   return
