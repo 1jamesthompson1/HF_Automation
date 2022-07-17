@@ -38,7 +38,7 @@ loop
   }
 }
 
-Home::
+Insert::
 Send ^c
 Sleep 100
 clipboard := StrReplace(clipboard, "`r`n")
@@ -197,5 +197,3 @@ pressImage(imageFileName, xOffset:=0, yOffset:=0)
 }
 
 Esc::ExitApp
-
-return
