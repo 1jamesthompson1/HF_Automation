@@ -58,12 +58,9 @@ if (clipboard != "") { ;If cell is not empty
 
 
 ;Grab the constituents ID
-loop %widthOfSpreadSheet%
-{
-  Send, {Left}
-  Sleep 100
-}
-Sleep 500
+Send, {Home}
+
+Sleep 100
 Send, ^c
 Sleep 100
 ;Move to the Kete Tab
