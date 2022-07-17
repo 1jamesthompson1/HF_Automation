@@ -71,7 +71,16 @@ Send, ^{Tab}
 Sleep 500
 
 ;Find the search bar and click on it
-pressImage("searchBar.png")
+WinGetPos, X, Y, W, H, A
+if (W < 985) { ;At this point the distnace does not decrease
+  clickX := 756
+} else if (W <= 1215) { ;There is a step
+  clickX := W*0.477 + 290
+} else { ;When it is the largest
+  clickX := W*0.477 + 292  - 80
+}
+Click, %clickX% 144
+
 Sleep 2000
 
 
@@ -163,12 +172,13 @@ Loop, 3 {
 
 Return
 
-pressImage(imageFileName)
+pressImage(imageFileName, xOffset:=0, yOffset:=0)
 {
   ;CoordMode Pixel
   Loop
   {
-    ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *6 searchImages\%imageFileName%
+    WinGetPos, X, Y, W, H, A
+    ImageSearch, FoundX, FoundY, 0, 0, W, H, *15 searchImages\%imageFileName%
     if (ErrorLevel = 2){
       MsgBox Could not conduct the search.
       Exit
@@ -176,14 +186,15 @@ pressImage(imageFileName)
     if (ErrorLevel = 0) {
       break
     }
-  }
-  Sleep 100
+  }  Sleep 100
   ;CoordMode Mouse
-  FoundX := FoundX + 10
-  FoundY := FoundY + 10
-  Click, %FoundX% %FoundY%
+  clickX := FoundX + xOffset
+  clickY := FoundY + yOffset
+  Click, %clickX% %clickY%
   Sleep 100
   return
 }
 
 Esc::ExitApp
+
+return
