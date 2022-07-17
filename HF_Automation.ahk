@@ -135,20 +135,13 @@ Send {Tab}
 FormatTime, TimeString,, dd/MM/yyyy
 Send, %TimeString% ;Expected date
 Sleep 1000
-Loop, 5
-{
-  Send {Tab}
-  Sleep 100
-}
+tab(5)
 Send Phone - Outgoing ;Contact method
 Send {Tab}
 Sleep 100
 Send {Tab}
 Send %TimeString% ;Actual date
-Loop, 4 {
-  Send {Tab}
-  Sleep 100
-}
+tab(4)
 
 ;Filling out comments
 Send Telefund -{Space}
@@ -164,10 +157,7 @@ Send -{Space}
 Send %userInitials%
 
 ;Move to the save button
-Loop, 3 {
-  Send {Tab}
-  Sleep 100
-}
+tab(3)
 
 Return
 
@@ -194,5 +184,16 @@ pressImage(imageFileName, xOffset:=0, yOffset:=0)
   clickY := FoundY + yOffset
   Click, %clickX% %clickY%
   Sleep 100
+  return
+}
+/*
+*Shorthand for looping through lots of tabs.
+*/
+tab(numOfTimes:=1)
+{
+  Loop, %numOfTimes% {
+    Send, {Tab}
+    Sleep 100
+  }
   return
 }
