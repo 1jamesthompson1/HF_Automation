@@ -32,6 +32,7 @@ It is now ready to go.
 It will stop before it actually enters the interaction into Kete
 Some things to remember
  - You need to be on the upgrade amount column when presing insert regardless of whether it is a conversion or not.
+ - The Kete tab need to be the right of the workbook everytime you want to use the script.
  - If you are looking at the kete tab youy should be able to see the interaction button as well as the search bar at the same time. It is easy to do asa long as you dont have a silly small window.
 Here is a screen shot to show you the requirements:
 ![keteScreenExample](https://user-images.githubusercontent.com/103026808/179383368-f8cfff19-74c2-4ba1-a70a-45a668fd16ce.png)
