@@ -5,6 +5,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance Force
 programName := HF automation v0.1.0
 
+;Setup loop
 loop
 {
   if !FileExist("config.ini")
@@ -32,6 +33,7 @@ loop
     break
   }
 }
+
 /*
 *Main script. This should be started on the upgradeAmount column.
 */
@@ -186,6 +188,7 @@ pressImage(imageFileName, xOffset:=0, yOffset:=0)
   Sleep 100
   return
 }
+
 /*
 *Shorthand for looping through lots of tabs.
 */
