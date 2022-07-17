@@ -83,7 +83,7 @@ Sleep 2000
 
 ;Enter consistents ID and enter
 Send, ^v
-Sleep 500
+Sleep 100
 Send, {Enter}
 Sleep 1000
 Send, {Enter}
