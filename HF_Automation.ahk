@@ -25,11 +25,6 @@ loop
         MsgBox, Please just enter either 6, 18, or 30
       }
       else {
-        if (campaign < 30) {
-          widthOfSpreadSheet := 36
-        } else {
-          widthOfSpreadSheet := 40
-        }
         break
       }
     }
