@@ -129,7 +129,7 @@ if (conversion) {
   Send Months
 }
 else {
-  Send outcomeFinal
+  Send %outcomeFinal%
 }
 
 Send {Tab}
@@ -158,9 +158,10 @@ Send %outcomeComment%{Space}
 if (conversion) ;If it is a conversion
 {
   Send of $%upgradeAmount%{Space}
+  Send , from $%originalAmount% to $%totalAmount%.{Space}
 }
 
-Send , from $%originalAmount% to $%totalAmount%.{Space}
+
 
 Send -{Space}
 Send %userInitials%
