@@ -196,5 +196,3 @@ pressImage(imageFileName, xOffset:=0, yOffset:=0)
   Sleep 100
   return
 }
-
-Esc::ExitApp
