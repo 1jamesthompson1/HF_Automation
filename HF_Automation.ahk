@@ -61,9 +61,11 @@ Sleep 100
 Send, ^c
 Sleep 100
 
-;Move to the Kete Tab
+;Move to the Kete Tab and make sure at the top of the page
 Send, ^{Tab}
-Sleep 500
+Send, 100
+Send, {Home}
+Sleep 100
 
 ;Find the search bar and click on it
 WinGetPos, X, Y, W, H, A
