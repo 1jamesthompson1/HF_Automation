@@ -32,8 +32,11 @@ loop
     break
   }
 }
-
+/*
+*Main script. This should be started on the upgradeAmount column.
+*/
 Insert::
+;Check if it is a conversion or not and get neccasary information
 Send ^c
 Sleep 100
 clipboard := StrReplace(clipboard, "`r`n")
@@ -54,10 +57,10 @@ if (clipboard != "") { ;If cell is not empty
 
 ;Grab the constituents ID
 Send, {Home}
-
 Sleep 100
 Send, ^c
 Sleep 100
+
 ;Move to the Kete Tab
 Send, ^{Tab}
 Sleep 500
@@ -89,7 +92,7 @@ pressImage("interaction.png", 20,10)
 Sleep 1000
 
 
-;Fill out the interaction
+;-----Fill out the interaction-------
 
 
 outcomeStart := "TM-RG "
@@ -103,16 +106,17 @@ else ;not a conversion
   outcome := "No"
 }
 outcomeFinal := outcomeStart . outcome . outcomeEnd
-Send %outcomeFinal%
+Send %outcomeFinal% ;Summary
 
 Send {Tab}
-Send Completed
+Send Completed ;Status
 Send {Tab}
-Send Telemarketing
+Send Telemarketing ;Category
 Send {Tab}
 Sleep 1000
 Send +{Tab}
 
+;Subcategory
 if (conversion) {
   Send TM Upgrade
   Send {Space}
@@ -125,23 +129,25 @@ else {
 }
 
 Send {Tab}
+
 FormatTime, TimeString,, dd/MM/yyyy
-Send, %TimeString%
+Send, %TimeString% ;Expected date
 Sleep 1000
 Loop, 5
 {
   Send {Tab}
   Sleep 100
 }
-Send Phone - Outgoing
+Send Phone - Outgoing ;Contact method
 Send {Tab}
 Sleep 100
 Send {Tab}
-Send %TimeString%
+Send %TimeString% ;Actual date
 Loop, 4 {
   Send {Tab}
   Sleep 100
 }
+
 ;Filling out comments
 Send Telefund -{Space}
 outcomeComment := outcome . outcomeEnd
@@ -152,12 +158,10 @@ if (conversion) ;If it is a conversion
   Send of $%upgradeAmount%{Space}
   Send , from $%originalAmount% to $%totalAmount%.{Space}
 }
-
-
-
 Send -{Space}
 Send %userInitials%
 
+;Move to the save button
 Loop, 3 {
   Send {Tab}
   Sleep 100
@@ -165,6 +169,9 @@ Loop, 3 {
 
 Return
 
+/*
+*This function will find and image and press it. It will wait until the image can be found.
+*/
 pressImage(imageFileName, xOffset:=0, yOffset:=0)
 {
   ;CoordMode Pixel
