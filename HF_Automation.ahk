@@ -69,7 +69,7 @@ if (W < 985) { ;At this point the distnace does not decrease
 } else if (W <= 1215) { ;There is a step
   clickX := W*0.477 + 290
 } else { ;When it is the largest
-  clickX := W*0.477 + 292  - 80
+  clickX := W*0.477 + 295  - 80
 }
 Click, %clickX% 144
 
@@ -85,7 +85,7 @@ Send, {Enter}
 
 Sleep 2000
 ;Go to interaction
-pressImage("interaction.png")
+pressImage("interaction.png", 20,10)
 Sleep 1000
 
 
