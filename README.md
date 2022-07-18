@@ -28,12 +28,13 @@ At the start of each shift or whenver you want to start using it:
 It is now ready to go.
 #### Using
 1. Press insert key
-2. Sit back and wait for it to do its thing
-It will stop before it actually enters the interaction into Kete
-Some things to remember
+2. Sit back and wait for it to do its thing  
+It will stop before it actually enters the interaction into Kete  
+Some things to remember (**Requirements**)
  - You need to be on the upgrade amount column when presing insert regardless of whether it is a conversion or not.
  - The Kete tab need to be the right of the workbook everytime you want to use the script.
  - If you are looking at the kete tab youy should be able to see the interaction button as well as the search bar at the same time. It is easy to do asa long as you dont have a silly small window.
+ - It is built off of a 1920x1080 screen so your screen needs to be this size. You might be having scaling issues so check setting on your computer.
 Here is a screen shot to show you the requirements:
 ![keteScreenExample](https://user-images.githubusercontent.com/103026808/179383368-f8cfff19-74c2-4ba1-a70a-45a668fd16ce.png)
 Ignore the black marks as they are put there for privacy reasons. The highlighted parts are what is important.
