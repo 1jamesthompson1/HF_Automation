@@ -124,7 +124,7 @@ Send, {Enter}
 Sleep 1000
 Send, {Enter}
 
-Sleep 2000
+MsgBox, , %programName%, Has the account loaded, 5
 ;Go to interaction
 Click %interactionX% %interactionY%
 Sleep 1000
