@@ -77,9 +77,9 @@ loop
 /*
 *Main script. This should be started on the upgradeAmount column.
 */
-Insert::
+Alt::
 ;Check if it is a conversion or not and get neccasary information
-CoordMode, MouseTM-RG No to Upgrade Completed Telemarketing 
+CoordMode, Mouse
 Send ^c
 Sleep 100
 clipboard := StrReplace(clipboard, "`r`n")
