@@ -29,7 +29,7 @@ At the start of each shift or whenver you want to start using it:
 2. Enter the campaign. Either 6, 18, 30
 It is now ready to go.
 #### Using
-1. Press insert key
+1. Press Alt key
 2. Sit back and wait for it to do its thing  
 It will stop before it actually enters the interaction into Kete  
 Some things to remember (**Requirements**)
