@@ -16,8 +16,10 @@ Here is a short video showing the process:
 #### First time Setup
 1. Navigate in the folder to the HF_automation.exe or press windows key and start typing HF_Automation.exe (press it when you see it)
 2. Put in your initials
+3. Follow prompt and press on search bar
+4. Follow prompt and pres on interaction
 Thats it is now setup. Here is a run through of that.
-![setupFirstTime](https://user-images.githubusercontent.com/103026808/179383571-67c48d44-6860-427a-94c2-0bdbec32f8b2.gif)
+![setupFirstTime](instructionGifs/setupFirstTime.gif)
 
 
 ### Usage
@@ -41,7 +43,7 @@ Ignore the black marks as they are put there for privacy reasons. The highlighte
 
 #### Example
 Here is an exmaple of it in action (A conversion for HF30m):
-![demo](https://user-images.githubusercontent.com/103026808/179383511-e9651919-05b0-403c-9976-08966db9ea73.gif)
+![demo](instructionGifs/demo.gif)
 
 
 ## Contributer Guide
