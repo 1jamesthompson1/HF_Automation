@@ -42,7 +42,7 @@ Here is a screenshot to show you the requirements:
 Ignore the black marks as they are put there for privacy reasons. The highlighted parts are what is important.
 
 #### Example
-Here is an exmaple of it in action (A conversion for HF30m):
+Here is an exmaple of it in action (A NTC for HF6m):
 ![demo](instructionGifs/demo.gif)
 
 
