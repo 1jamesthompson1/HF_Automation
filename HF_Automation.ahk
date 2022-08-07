@@ -3,21 +3,28 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance Force
-programName := HF automation v0.1.0
+
+version := "v0.1.0"
+programName := "HF Automation Script "version
 
 ;Setup loop
 loop
 {
-  if !FileExist("config.ini")
+  if !FileExist("config.ini") ;First time setup
   {
     InputBox, userInitials, %programName%, What is your intials?
     if ErrorLevel
         ExitApp
     IniWrite, %userInitials%, config.ini, userDetails, userInitials
-
+    IniWrite, %version%, config.ini, Info, version
   }
-  else
+  else ; Usual start up
   {
+    IniRead, versionConfig, config.ini, Info, version
+    if (version != versionConfig) {
+      FileDelete, config.ini
+      continue
+    }
     loop {
       InputBox, campaign, %programName%, What is the campagin?
       if ErrorLevel
