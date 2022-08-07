@@ -16,6 +16,33 @@ loop
     if ErrorLevel
         ExitApp
     IniWrite, %userInitials%, config.ini, userDetails, userInitials
+
+    CoordMode, Mouse
+    MsgBox, ,%programName%, Please press on the search bar
+    MouseDisabling := !MouseDisabling
+    Send {Home}
+    sleep 200
+    KeyWait, LButton, D
+    MouseGetPos, xpos, ypos
+    searchBarX := xpos
+    searchBarY := ypos
+
+    MouseDisabling := !MouseDisabling
+    MsgBox, ,%programName%, Please press on the interaction
+    MouseDisabling := !MouseDisabling
+    Send {Home}
+    sleep 200
+    KeyWait, LButton, D
+    MouseGetPos, xpos, ypos
+    interactionX := xpos
+    interactionY := ypos
+    MouseDisabling := !MouseDisabling
+
+    IniWrite, %searchBarX%, config.ini, Button Locations, searchBarX
+    IniWrite, %searchBarY%, config.ini, Button Locations, searchBarY
+    IniWrite, %interactionX%, config.ini, Button Locations, interactionX
+    IniWrite, %interactionY%, config.ini, Button Locations, interactionY
+
     IniWrite, %version%, config.ini, Info, version
   }
   else ; Usual start up
@@ -36,6 +63,12 @@ loop
         break
       }
     }
+
+    IniRead, searchBarX, config.ini, Button Locations, searchBarX
+    IniRead, searchBarY, config.ini, Button Locations, searchBarY
+    IniRead, interactionX, config.ini, Button Locations, interactionX
+    IniRead, interactionY, config.ini, Button Locations, interactionY
+
     IniRead, userInitials, config.ini, userDetails, userInitials
     break
   }
@@ -46,6 +79,7 @@ loop
 */
 Insert::
 ;Check if it is a conversion or not and get neccasary information
+CoordMode, MouseTM-RG No to Upgrade Completed Telemarketing 
 Send ^c
 Sleep 100
 clipboard := StrReplace(clipboard, "`r`n")
@@ -77,18 +111,11 @@ Send, {Home}
 Sleep 100
 
 ;Find the search bar and click on it
-WinGetPos, X, Y, W, H, A
-if (W < 985) { ;At this point the distnace does not decrease
-  clickX := 756
-} else if (W <= 1215) { ;There is a step
-  clickX := W*0.477 + 290
-} else { ;When it is the largest
-  clickX := W*0.477 + 295  - 80
-}
-Click, %clickX% 144
-
-Sleep 2000
-
+Click %searchBarX% %searchBarY%
+Sleep 500
+Send ^a
+Sleep 100
+Send {BackSpace}
 
 ;Enter consistents ID and enter
 Send, ^v
@@ -99,7 +126,7 @@ Send, {Enter}
 
 Sleep 2000
 ;Go to interaction
-pressImage("interaction.png", 20,10)
+Click %interactionX% %interactionY%
 Sleep 1000
 
 
@@ -171,32 +198,6 @@ tab(3)
 Return
 
 /*
-*This function will find and image and press it. It will wait until the image can be found.
-*/
-pressImage(imageFileName, xOffset:=0, yOffset:=0)
-{
-  ;CoordMode Pixel
-  Loop
-  {
-    WinGetPos, X, Y, W, H, A
-    ImageSearch, FoundX, FoundY, 0, 0, W, H, *15 searchImages\%imageFileName%
-    if (ErrorLevel = 2){
-      MsgBox Could not conduct the search.
-      Exit
-    }
-    if (ErrorLevel = 0) {
-      break
-    }
-  }  Sleep 100
-  ;CoordMode Mouse
-  clickX := FoundX + xOffset
-  clickY := FoundY + yOffset
-  Click, %clickX% %clickY%
-  Sleep 100
-  return
-}
-
-/*
 *Shorthand for looping through lots of tabs.
 */
 tab(numOfTimes:=1)
@@ -207,3 +208,7 @@ tab(numOfTimes:=1)
   }
   return
 }
+
+#if  MouseDisabling
+LButton::return
+#if 
