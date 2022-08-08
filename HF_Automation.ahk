@@ -108,11 +108,11 @@ Sleep 100
 Send, ^{Tab}
 Send, 100
 Send, {Home}
-Sleep 100
+Sleep 300
 
 ;Find the search bar and click on it
 Click %searchBarX% %searchBarY%
-Sleep 500
+Sleep 200
 Send ^a
 Sleep 100
 Send {BackSpace}
@@ -126,6 +126,8 @@ Send, {Enter}
 
 MsgBox, , %programName%, Has the account loaded, 5
 ;Go to interaction
+Send, {Home}
+Sleep 350
 Click %interactionX% %interactionY%
 Sleep 1000
 
