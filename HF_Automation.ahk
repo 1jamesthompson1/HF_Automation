@@ -42,7 +42,7 @@ loop
     IniWrite, %searchBarY%, config.ini, Button Locations, searchBarY
     IniWrite, %interactionX%, config.ini, Button Locations, interactionX
     IniWrite, %interactionY%, config.ini, Button Locations, interactionY
-
+    IniWrite, false, config.ini, userDetails, formatDateUS
     IniWrite, %version%, config.ini, Info, version
   }
   else ; Usual start up
@@ -68,8 +68,8 @@ loop
     IniRead, searchBarY, config.ini, Button Locations, searchBarY
     IniRead, interactionX, config.ini, Button Locations, interactionX
     IniRead, interactionY, config.ini, Button Locations, interactionY
-
     IniRead, userInitials, config.ini, userDetails, userInitials
+    IniRead, formatDateUS, config.ini, userDetails, formatDateUS
     break
   }
 }
@@ -167,10 +167,13 @@ if (conversion) {
 else {
   Send %outcomeFinal%
 }
-
 Send {Tab}
+if (formatDateUS = "true") {
+  FormatTime, TimeString,, MM/dd/yyyy
+} else {
+  FormatTime, TimeString,,dd/MM/yyyy
+}
 
-FormatTime, TimeString,, dd/MM/yyyy
 Send, %TimeString% ;Expected date
 Sleep 1000
 tab(5)
