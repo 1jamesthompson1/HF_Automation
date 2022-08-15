@@ -4,7 +4,7 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance Force
 
-version := "v0.1.0"
+version := "v0.2.0"
 programName := "HF Automation Script "version
 
 ;Setup loop
