@@ -4,7 +4,7 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance Force
 
-version := "v0.2.0"
+version := "v0.2.1"
 programName := "HF Automation Script "version
 
 ;Setup loop
@@ -106,9 +106,9 @@ Sleep 100
 
 ;Move to the Kete Tab and make sure at the top of the page
 Send, ^{Tab}
-Send, 100
+Send, 200
 Send, {Home}
-Sleep 300
+Sleep 500
 
 ;Find the search bar and click on it
 Click %searchBarX% %searchBarY%
@@ -155,7 +155,7 @@ Send Telemarketing ;Category
 Send {Tab}
 Sleep 1000
 Send +{Tab}
-
+Sleep 500
 ;Subcategory
 if (conversion) {
   Send TM Upgrade
