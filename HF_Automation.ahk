@@ -155,7 +155,7 @@ Send Telemarketing ;Category
 Send {Tab}
 Sleep 1000
 Send +{Tab}
-
+Sleep 500
 ;Subcategory
 if (conversion) {
   Send TM Upgrade
