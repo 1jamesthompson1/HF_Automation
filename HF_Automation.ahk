@@ -106,9 +106,9 @@ Sleep 100
 
 ;Move to the Kete Tab and make sure at the top of the page
 Send, ^{Tab}
-Send, 100
+Send, 200
 Send, {Home}
-Sleep 300
+Sleep 500
 
 ;Find the search bar and click on it
 Click %searchBarX% %searchBarY%
