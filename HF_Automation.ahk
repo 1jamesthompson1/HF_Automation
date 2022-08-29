@@ -4,7 +4,7 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance Force
 
-version := "v0.2.1"
+version := "v0.3.0-Dev"
 programName := "HF Automation Script "version
 
 ;Setup loop
@@ -74,6 +74,7 @@ loop
   }
 }
 
+
 /*
 *Main script. This should be started on the upgradeAmount column.
 */
@@ -127,25 +128,32 @@ Send, {Enter}
 MsgBox, , %programName%, Has the account loaded, 30
 ;Go to interaction
 Send, {Home}
-Sleep 350
+Sleep 550
 Click %interactionX% %interactionY%
-Sleep 1000
+Sleep 2000
 
 
 ;-----Fill out the interaction-------
+fillOutIneraction(userInitials, True, conversion, " to Upgrade")
+Return
 
+fillOutIneraction(callerInitials, contact := False, conversion := False, outcomeEnd := " Unable to contact", outcomeStart := "TM-RG ")  {
+  global
+if (contact) {
+  if (conversion) ;If it is a conversion
+  {
+    outcome := "Yes"
+  }
+  else ;not a conversion
+  {
+    outcome := "No"
+  }
+  outcomeFinal := outcomeStart . outcome . outcomeEnd
+} else 
+{
+  outcomeFinal := outcomeStart . outcomeEnd
+}
 
-outcomeStart := "TM-RG "
-outcomeEnd := " to Upgrade"
-if (conversion) ;If it is a conversion
-{
-  outcome := "Yes"
-}
-else ;not a conversion
-{
-  outcome := "No"
-}
-outcomeFinal := outcomeStart . outcome . outcomeEnd
 Send %outcomeFinal% ;Summary
 
 Send {Tab}
@@ -153,20 +161,20 @@ Send Completed ;Status
 Send {Tab}
 Send Telemarketing ;Category
 Send {Tab}
-Sleep 1000
+Sleep 2000
 Send +{Tab}
-Sleep 500
+Sleep 1000
 ;Subcategory
-if (conversion) {
-  Send TM Upgrade
-  Send {Space}
-  Send %campaign%
-  Send {Space}
-  Send Months
-}
-else {
-  Send %outcomeFinal%
-}
+  if (conversion && contact) {
+    Send TM Upgrade
+    Send {Space}
+    Send %campaign%
+    Send {Space}
+    Send Months
+  } else {
+    Send %outcomeFinal%
+  }
+  Sleep 100
 Send {Tab}
 if (formatDateUS = "true") {
   FormatTime, TimeString,, MM/dd/yyyy
@@ -186,21 +194,25 @@ tab(4)
 
 ;Filling out comments
 Send Telefund -{Space}
-outcomeComment := outcome . outcomeEnd
+if (contact) {
+  outcomeComment := outcome . outcomeEnd
+} else {
+  outcomeComment := outcomeEnd
+}
+
 Send %outcomeComment%{Space}
 
-if (conversion) ;If it is a conversion
+if (contact && conversion) ;If it is a conversion
 {
   Send of $%upgradeAmount%{Space}
   Send , from $%originalAmount% to $%totalAmount%.{Space}
 }
 Send -{Space}
-Send %userInitials%
+Send %callerInitials%
 
 ;Move to the save button
 tab(3)
-
-Return
+}
 
 /*
 *Shorthand for looping through lots of tabs.
