@@ -124,7 +124,7 @@ Send, {Enter}
 Sleep 1000
 Send, {Enter}
 
-MsgBox, , %programName%, Has the account loaded, 5
+MsgBox, , %programName%, Has the account loaded, 30
 ;Go to interaction
 Send, {Home}
 Sleep 350
