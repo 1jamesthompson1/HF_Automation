@@ -74,70 +74,41 @@ loop
   }
 }
 
+;Not contact script
+!L::
+openAccount()
+fillOutIneraction(userInitials)
+return
 
 /*
 *Main script. This should be started on the upgradeAmount column.
 */
 Alt::
-;Check if it is a conversion or not and get neccasary information
-CoordMode, Mouse
-Send ^c
-Sleep 100
-clipboard := StrReplace(clipboard, "`r`n")
-if (clipboard != "") { ;If cell is not empty
-  conversion := true
-  upgradeAmount := clipboard
-  Send, {Right}
-  Sleep 200
+  ;Check if it is a conversion or not and get neccasary information
+  CoordMode, Mouse
   Send ^c
-  Sleep, 200
-  originalAmount := clipboard - upgradeAmount
-  totalAmount := clipboard
-  Send {Left}
-} else {
-  conversion := false
-}
+  Sleep 100
+  clipboard := StrReplace(clipboard, "`r`n")
+  if (clipboard != "") { ;If cell is not empty
+    conversion := true
+    upgradeAmount := clipboard
+    Send, {Right}
+    Sleep 200
+    Send ^c
+    Sleep, 200
+    originalAmount := clipboard - upgradeAmount
+    totalAmount := clipboard
+    Send {Left}
+  } else {
+    conversion := false
+  }
 
-
-;Grab the constituents ID
-Send, {Home}
-Sleep 100
-Send, ^c
-Sleep 100
-
-;Move to the Kete Tab and make sure at the top of the page
-Send, ^{Tab}
-Send, 200
-Send, {Home}
-Sleep 500
-
-;Find the search bar and click on it
-Click %searchBarX% %searchBarY%
-Sleep 200
-Send ^a
-Sleep 100
-Send {BackSpace}
-
-;Enter consistents ID and enter
-Send, ^v
-Sleep 100
-Send, {Enter}
-Sleep 1000
-Send, {Enter}
-
-MsgBox, , %programName%, Has the account loaded, 30
-;Go to interaction
-Send, {Home}
-Sleep 550
-Click %interactionX% %interactionY%
-Sleep 2000
-
-
-;-----Fill out the interaction-------
-fillOutIneraction(userInitials, True, conversion, " to Upgrade")
+  openAccount()
+  ;-----Fill out the interaction-------
+  fillOutIneraction(userInitials, True, conversion, " to Upgrade")
 Return
 
-fillOutIneraction(callerInitials, contact := False, conversion := False, outcomeEnd := " Unable to contact", outcomeStart := "TM-RG ")  {
+fillOutIneraction(callerInitials, contact := False, conversion := False, outcomeEnd := "Unable to contact", outcomeStart := "TM-RG ")  {
   global
 if (contact) {
   if (conversion) ;If it is a conversion
@@ -212,6 +183,44 @@ Send %callerInitials%
 
 ;Move to the save button
 tab(3)
+}
+
+
+openAccount() {
+  global
+  ;Grab the constituents ID
+Send, {Home}
+Sleep 100
+Send, ^c
+Sleep 100
+
+;Move to the Kete Tab and make sure at the top of the page
+Send, ^{Tab}
+Send, 200
+Send, {Home}
+Sleep 500
+
+;Find the search bar and click on it
+Click %searchBarX% %searchBarY%
+Sleep 200
+Send ^a
+Sleep 100
+Send {BackSpace}
+
+;Enter consistents ID and enter
+Send, ^v
+Sleep 100
+Send, {Enter}
+Sleep 1000
+Send, {Enter}
+
+MsgBox, , %programName%, Has the account loaded, 30
+;Go to interaction
+Send, {Home}
+Sleep 550
+Click %interactionX% %interactionY%
+Sleep 2000
+
 }
 
 /*
